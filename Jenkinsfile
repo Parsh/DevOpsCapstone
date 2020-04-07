@@ -58,7 +58,7 @@ pipeline {
 			}
 		}
 
-        stage('Traffic To Blue: Service Creation') {
+        stage('Traffic To Blue') {
 			steps {
 				withAWS(region:'ap-south-1', credentials:'aws-credentials') {
 					sh '''
@@ -72,7 +72,17 @@ pipeline {
             steps {
                 input "Redirect Traffic To Green?"
             }
-        }      
+        } 
+
+        stage('Redirect Traffic To Green') {
+			steps {
+				withAWS(region:'ap-south-1', credentials:'aws-credentials') {
+					sh '''
+						kubectl apply -f ./blue-green/services/green-service.json
+					'''
+				}
+			}
+		}     
 
 	}
 }
