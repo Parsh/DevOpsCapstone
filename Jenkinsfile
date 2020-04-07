@@ -42,11 +42,21 @@ pipeline {
 			steps {
 				withAWS(region:'ap-south-1', credentials:'aws-credentials') {
 					sh '''
-						kubectl apply -f ./blue-controller.json
+						kubectl apply -f ./blue-green/controllers/blue-controller.json
 					'''
 				}
 			}
 		} 
+
+        stage('Green Container Deployment') {
+			steps {
+				withAWS(region:'ap-south-1', credentials:'aws-credentials') {
+					sh '''
+						kubectl apply -f ./blue-green/controllers/green-controller.json
+					'''
+				}
+			}
+		}
 
 	}
 }
