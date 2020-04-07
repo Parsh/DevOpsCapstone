@@ -28,5 +28,15 @@ pipeline {
 			}
 		}
 
+        stage('kubectl context settting') {
+			steps {
+				withAWS(region:'ap-south-1', credentials:'aws-credentials') {
+					sh '''
+						kubectl config use-context arn:aws:eks:ap-south-1:195488348571:cluster/kubecluster
+					'''
+				}
+			}
+		}
+
 	}
 }
