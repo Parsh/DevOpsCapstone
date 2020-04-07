@@ -17,7 +17,7 @@ pipeline {
 			}
 		}
 
-        stage('Push to Dockerhub') {
+        stage('Push To Dockerhub') {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
@@ -28,7 +28,7 @@ pipeline {
 			}
 		}
 
-        stage('kubectl context settting') {
+        stage('Kubectl Context Settting') {
 			steps {
 				withAWS(region:'ap-south-1', credentials:'aws-credentials') {
 					sh '''
@@ -37,6 +37,16 @@ pipeline {
 				}
 			}
 		}
+
+       stage('Blue Container Deployment') {
+			steps {
+				withAWS(region:'ap-south-1', credentials:'aws-credentials') {
+					sh '''
+						kubectl apply -f ./blue-controller.json
+					'''
+				}
+			}
+		} 
 
 	}
 }
