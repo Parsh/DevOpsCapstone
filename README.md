@@ -17,9 +17,8 @@
 - Eksctl
 - Kubectl
 
-## The files included are:
+## Folder Description:
 
-```sh
-/InfrastructurePipeline : Contains jenkinsfile for cluster deployment on EKS
-/ServicePipeline : Contains jenkinsfile, dockerfile and src code for deploying a basic website to EKS cluster with a blue/green strategy
-```
+> InfrastructurePipeline : Contains jenkinsfile for cluster deployment on EKS
+
+> ServicePipeline : Contains jenkinsfile, dockerfile and src code for deploying a basic website to EKS cluster with a blue/green strategy
