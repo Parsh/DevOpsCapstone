@@ -68,5 +68,11 @@ pipeline {
 			}
 		}
 
+		stage('Traffic Switch') {
+            steps {
+                input "Redirect Traffic To Green?"
+            }
+        }      
+
 	}
 }
