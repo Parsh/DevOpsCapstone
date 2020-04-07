@@ -58,5 +58,15 @@ pipeline {
 			}
 		}
 
+        stage('Traffic To Blue: Service Creation') {
+			steps {
+				withAWS(region:'ap-south-1', credentials:'aws-credentials') {
+					sh '''
+						kubectl apply -f ./blue-green/services/blue-service.json
+					'''
+				}
+			}
+		}
+
 	}
 }
